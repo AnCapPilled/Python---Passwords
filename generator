@@ -1,0 +1,31 @@
+import random
+import string
+
+def gerar_senha(comprimento, usar_letras=True, usar_numeros=True, usar_simbolos=True):
+    caracteres = ''
+    if usar_letras:
+        caracteres += string.ascii_letters
+    if usar_numeros:
+        caracteres += string.digits
+    if usar_simbolos:
+        caracteres += string.punctuation
+
+    if not (usar_letras or usar_numeros or usar_simbolos):
+        print("Erro: Pelo menos um tipo de caractere deve ser selecionado para gerar a senha.")
+        return None
+
+    senha = ''.join(random.choice(caracteres) for i in range(comprimento))
+    return senha
+
+def main():
+    comprimento = int(input("Digite o comprimento da senha desejada: "))
+    usar_letras = input("Incluir letras na senha? (s/n): ").lower() == 's'
+    usar_numeros = input("Incluir números na senha? (s/n): ").lower() == 's'
+    usar_simbolos = input("Incluir símbolos na senha? (s/n): ").lower() == 's'
+
+    senha = gerar_senha(comprimento, usar_letras, usar_numeros, usar_simbolos)
+    if senha:
+        print("Sua senha gerada é:", senha)
+
+if __name__ == "__main__":
+    main()
